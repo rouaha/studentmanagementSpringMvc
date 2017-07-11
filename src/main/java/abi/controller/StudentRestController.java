@@ -44,5 +44,9 @@ public class StudentRestController {
 
         studentService.deleteStudent(serialNo);
     }
+    @RequestMapping(value="/createStudent/secure/page",method = RequestMethod.GET)
+    public String getSecure(){
+        return "Secure page";
+    }
 
 }
