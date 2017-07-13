@@ -62,7 +62,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().permitAll()
                 .and()
                 .logout()
-                .deleteCookies("JSESSION").
+                .deleteCookies("JSESSIONID").
                 logoutUrl("/logout")
                 //.logoutRequestMatcher(
                      //   new AntPathRequestMatcher("/login?logout"))
