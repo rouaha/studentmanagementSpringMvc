@@ -8,6 +8,9 @@ import abi.repository.UserRepo;
 import abi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,28 +28,41 @@ import java.util.*;
 @Component("customerService")
 public class CustomerService implements UserDetailsService {
 
+
 //@Autowired
 //private UserRepository userRepository;
     @Bean
-    public UserRepository userRepository(){
-        return  new UserRepository();
+     UserRepository userRepository(){
+        return  new UserRepository() {
+        };
     }
+
+     @Bean User getu(){
+            Set<Role> setrole= new HashSet<>();
+            setrole.add(new Role("ROLE_ADMIN"));
+            return new User(1,"email","admin","l","123",1, setrole);
+     }
+
+
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user= userRepository().findByUserName(userName);
-      if(user!=null){ return new UserDetailsModel(user);}
-      return null;
-    // List<GrantedAuthority> authorities= buildUserAuthority(user.getRoles());
+        User user =  getu();
 
-      //  return buildUserForAuthentication(user,authorities);
+                //userRepository().findByUserName(userName);
+      if(user!=null){
 
+        //  return new UserDetailsModel(user);}
+
+     List<GrantedAuthority> authorities= buildUserAuthority(user.getRoles());
+
+        return buildUserForAuthentication(user,authorities);}
+        return null;
     }
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
      return new org.springframework.security.core.userdetails.User(user.getName(),user.getPassword(),
              true,true,true,true, authorities);
-
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<Role> roles) {

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 /**
  * Created by BS190 on 7/11/2017.
  */
-@Component
-public class UserRepository  {
+
+public abstract class UserRepository  {
     @Autowired
     UserRepo userRepo;
     public User findByUserName(String name){
