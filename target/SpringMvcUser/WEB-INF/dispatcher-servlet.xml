@@ -4,24 +4,47 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/data/jpa
-       http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+      http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
     <jpa:repositories base-package="abi.repository"
                       entity-manager-factory-ref="entityManager"/>
-
-
-
 
     <context:component-scan base-package="abi"/>
 
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+<!--security cofiguration-->
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/secure/**" access="hasAnyRole('ROLE_ADMIN')"/>
+       <!-- <security:form-login/>-->
+        <security:csrf disabled="true"/>
+       <!-- <security:logout logout-success-url="/logout"/>-->
+        <security:form-login login-page='/login' login-processing-url="/j_spring_security_check"
+
+                       username-parameter="username"      password-parameter="password" />
+        <security:logout logout-url="/logout" logout-success-url="/logoutSuccessful"
+                delete-cookies="JSESSIONID" invalidate-session="true" />
+
+    </security:http>
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider user-service-ref="customerService">
+
+        </security:authentication-provider>
+    </security:authentication-manager>
+    <bean id="customerService" class="abi.service.CustomerService"/>
+   <!--end security cnfiguration-->
+
+
 
 
 

@@ -110,27 +110,45 @@
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="35" parent="13" name="UK_gtvhfoxqgeb6ghsg59yjakenx">
+    <column id="35" parent="13" name="user_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="13" name="role_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="37" parent="13" name="UK_gtvhfoxqgeb6ghsg59yjakenx">
       <ColNames>roleId</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="36" parent="13" name="PRIMARY">
+    <index id="38" parent="13" name="UK_5q4rc4fh1on6567qk69uesvyf">
+      <ColNames>role_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="39" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userId
 roleId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="37" parent="13" name="UK_gtvhfoxqgeb6ghsg59yjakenx">
+    <key id="40" parent="13" name="UK_gtvhfoxqgeb6ghsg59yjakenx">
       <ColNames>roleId</ColNames>
       <UnderlyingIndexName>UK_gtvhfoxqgeb6ghsg59yjakenx</UnderlyingIndexName>
     </key>
-    <foreign-key id="38" parent="13" name="FKnb3y3wepo33x6v6xyrniy4qo2">
+    <key id="41" parent="13" name="UK_5q4rc4fh1on6567qk69uesvyf">
+      <ColNames>role_id</ColNames>
+      <UnderlyingIndexName>UK_5q4rc4fh1on6567qk69uesvyf</UnderlyingIndexName>
+    </key>
+    <foreign-key id="42" parent="13" name="FKnb3y3wepo33x6v6xyrniy4qo2">
       <ColNames>userId</ColNames>
       <RefSchemaName>studentmanagement</RefSchemaName>
       <RefTableName>user</RefTableName>
       <RefColNames>userId</RefColNames>
     </foreign-key>
-    <foreign-key id="39" parent="13" name="FK778hu8eivee4l216kecqwg8fb">
+    <foreign-key id="43" parent="13" name="FK778hu8eivee4l216kecqwg8fb">
       <ColNames>roleId</ColNames>
       <RefSchemaName>studentmanagement</RefSchemaName>
       <RefTableName>roles</RefTableName>

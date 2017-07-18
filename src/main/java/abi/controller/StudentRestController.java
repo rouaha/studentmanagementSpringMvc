@@ -1,7 +1,9 @@
 package abi.controller;
 
+import abi.model.RegiUserModel;
 import abi.model.StudentModel;
 import abi.model.UserModel;
+import abi.service.CustomerService;
 import abi.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,6 +24,8 @@ import java.util.List;
 public class StudentRestController {
     @Autowired
     StudentService studentService;
+    @Autowired
+    CustomerService  customerService;
 
 
     @RequestMapping(value="studentInfo", method= RequestMethod.GET,produces ="application/json")
@@ -36,6 +40,11 @@ public class StudentRestController {
         String checkemail=studentlogData.getEmail();
 
         return studentService.retriveStudentByEmail(checkemail);
+
+    }
+    @RequestMapping(value="/userDetails/{userName}",method=RequestMethod.GET)
+    public RegiUserModel getUserDetails(@PathVariable("userName") String userName){
+        return  customerService.getUserDetails(userName);
 
     }
 
@@ -55,13 +64,6 @@ public class StudentRestController {
     }
 
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/login?logout";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
-    }
+
 
 }

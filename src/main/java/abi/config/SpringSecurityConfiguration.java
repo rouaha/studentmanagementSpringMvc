@@ -1,46 +1,46 @@
 package abi.config;
 
-import abi.controller.StudentController;
-import abi.repository.UserRepo;
-import abi.repository.UserRepository;
+
 import abi.service.CustomerService;
 
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.http.HttpStatus;
+
+import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateExceptionTranslator;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+
+import javax.sql.DataSource;
+import org.springframework.core.env.Environment;
 
 
 /**
- * Created by BS190 on 7/9/2017.
+ * Created by BS190 on 7/9/2017.  Imp: without xml but couldn't load UserRepo bean.......
  */
-@Configuration
+//@Configuration
+
+@ComponentScan(basePackages = {"abi"})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-//@EnableJpaRepositories(basePackageClasses = UserRepo.class)
+@EnableJpaRepositories(basePackages = {"abi.repository"})
+@PropertySource("classpath:../application.properties")
 @EnableWebSecurity
 
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
+   /* @Bean
     public CustomerService  getCustomerService() {
         return  new CustomerService();
     }
@@ -49,7 +49,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(getCustomerService());
-    }
+    }*/
 
 
     @Override
@@ -75,5 +75,56 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
        // return  new CustomLogoutSuccessHandler();
    // }
 
+
+    // entity config
+
+    private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
+    private static final String PROPERTY_NAME_DATABASE_URL = "db.url";
+    private static final String PROPERTY_NAME_DATABASE_USERNAME = "db.username";
+    private static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
+
+    @Resource
+    private Environment environment;
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        dataSource.setDriverClassName(environment
+                .getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        dataSource.setUrl(environment
+                .getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
+        dataSource.setUsername(environment
+                .getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
+        dataSource.setPassword(environment
+                .getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
+
+        return dataSource;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager() {
+        EntityManagerFactory factory = entityManagerFactory();
+        return new JpaTransactionManager(factory);
+    }
+
+    @Bean
+    public EntityManagerFactory entityManagerFactory() {
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setGenerateDdl(Boolean.TRUE);
+        vendorAdapter.setShowSql(Boolean.TRUE);
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPackagesToScan("abi");
+        factory.setDataSource(dataSource());
+        factory.afterPropertiesSet();
+        factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
+        return factory.getObject();
+    }
+
+    @Bean
+    public HibernateExceptionTranslator hibernateExceptionTranslator() {
+        return new HibernateExceptionTranslator();
+    }
 
 }

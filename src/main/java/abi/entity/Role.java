@@ -1,21 +1,27 @@
 package abi.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
- * Created by BS190 on 7/9/2017.
+ * Created by BS190 on 7/17/2017.
  */
 @Entity
 @Table(name="roles")
 public class Role {
-    public int getRoleId() {
+    @Id
+    @GeneratedValue
+    private long roleId;
+    private  String role;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    public long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(int roleId) {
+    public void setRoleId(long roleId) {
         this.roleId = roleId;
     }
 
@@ -27,14 +33,11 @@ public class Role {
         this.role = role;
     }
 
-    public Role(String role) {
-        this.role = role;
+    public User getUser() {
+        return user;
     }
 
-    @Id
-    @GeneratedValue
-
-    private int roleId;
-    private String role;
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -18,31 +18,10 @@ public class User {
     private String lastName;
     private  int active;
     private  String password;
-    @OneToMany(cascade =CascadeType.ALL,fetch =FetchType.EAGER)
-    @JoinTable(name="user_roles",joinColumns = @JoinColumn(name = "userId"),inverseJoinColumns = @JoinColumn(name = "roleId"))
+    @OneToMany(mappedBy = "user",cascade =CascadeType.ALL,fetch =FetchType.EAGER)
+   // @JoinTable(name="user_roles",joinColumns = @JoinColumn(name = "userId"),inverseJoinColumns = @JoinColumn(name = "roleId"))
     private Set<Role> roles;
 
-public User(){}
-
-    public User(User user) {
-        this.active=user.getActive();
-        this.userId=user.getUserId();
-        this.name=user.getName();
-        this.lastName=user.getLastName();
-        this.password=user.getPassword();
-        this.email=user.getEmail();
-
-    }
-
-    public User(int i, String email, String admin, String l, String pass, int j, Set<Role> role) {
-        this.active=j;
-        this.userId=i;
-        this.name=admin;
-        this.lastName=l;
-        this.password=pass;
-        this.email=email;
-        this.roles= role;
-    }
 
     public long getUserId() {
         return userId;

@@ -2,22 +2,18 @@ package abi.service;
 
 import abi.entity.Role;
 import abi.entity.User;
-import abi.model.UserDetailsModel;
-import abi.repository.UserRepo;
+import abi.model.RegiUserModel;
 
+import abi.model.RoleModel;
 import abi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -25,31 +21,34 @@ import java.util.*;
  * Created by BS190 on 7/9/2017.
  */
 
-@Component("customerService")
+//@Component("customerService")
+    @Component
 public class CustomerService implements UserDetailsService {
 
 
-//@Autowired
-//private UserRepository userRepository;
+@Autowired
+ private UserRepository userRepository;
+   /*
     @Bean
      UserRepository userRepository(){
         return  new UserRepository() {
         };
-    }
-
+    }*/
+/*
      @Bean User getu(){
             Set<Role> setrole= new HashSet<>();
             setrole.add(new Role("ROLE_ADMIN"));
             return new User(1,"email","admin","l","123",1, setrole);
      }
-
+*/
 
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user =  getu();
+        User user =
+                //getu();
 
-                //userRepository().findByUserName(userName);
+               userRepository.findByUserName(userName);
       if(user!=null){
 
         //  return new UserDetailsModel(user);}
@@ -74,6 +73,29 @@ public class CustomerService implements UserDetailsService {
         List<GrantedAuthority> listAuth=new ArrayList<>(setAuth);
         return listAuth;
     }
+    /*
+    fetch user data ----
+     */
 
+    public RegiUserModel getUserDetails(String userName){
+        RegiUserModel regiUserModel = new RegiUserModel();
+        User user = userRepository.findByUserName(userName);
+        if (user!=null){
+            regiUserModel.setUserId(user.getUserId());
+            regiUserModel.setEmail(user.getEmail());
+            regiUserModel.setName(user.getName());
+            Set<RoleModel> roleModels = new HashSet<>();
+            for (Role role:user.getRoles()) {
+                RoleModel roleModel = new RoleModel();
+                roleModel.setRole(role.getRole());
+                roleModels.add(roleModel);
+
+            }
+            regiUserModel.setRoles(roleModels);
+
+
+        }
+        return regiUserModel;
+    }
 
 }
