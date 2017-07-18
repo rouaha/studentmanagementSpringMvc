@@ -28,7 +28,7 @@ public class StudentRestController {
     CustomerService  customerService;
 
 
-    @RequestMapping(value="studentInfo", method= RequestMethod.GET,produces ="application/json")
+    @RequestMapping(value="secure/studentInfo", method= RequestMethod.GET,produces ="application/json")
     public List<StudentModel> getStudenttList(){
 
         return studentService.retriveStudent();
@@ -53,7 +53,7 @@ public class StudentRestController {
 
         studentService.createStudentByUser(studentInfo);
     }
-    @RequestMapping(value="deleteStudent/{serialNo}", method=RequestMethod.DELETE)
+    @RequestMapping(value="secure/deleteStudent/{serialNo}", method=RequestMethod.DELETE)
     public void deletePatient(@PathVariable("serialNo") int serialNo){
 
         studentService.deleteStudent(serialNo);

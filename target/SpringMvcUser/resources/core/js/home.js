@@ -3,7 +3,7 @@
  controller('formCtrl', function($scope,$http,$window) {
     var baseurl="http://localhost:8081/";
     $scope.parent = {'checkOut':''};
-    $scope.patientage=0;
+    $scope.studentage=0;
     $scope.UserlogDetails=[];
     $scope.chekedmail='';
     var mail=false;
@@ -15,7 +15,7 @@
         var ageDate = new Date(ageDifMs); // miliseconds from epoch
         var chage=ageDate.getUTCFullYear() - 1970;
         var age= Math.abs(ageDate.getUTCFullYear() - 1970);
-        $scope.patientage=age + " Years";
+        $scope.studentage=age + " Years";
         console.log('Test focus age...'+chage);
 
     };
@@ -26,15 +26,15 @@
         var userDetails={
             "userName":$scope.Userregi.userName,
             "email":$scope.Userregi.email,
-            "password":$scope.Userregi.pass,
+            "password":$scope.Userregi.password,
             "studentId":"",
             "db":$scope.parent.checkOut,
-            "age":$scope.patientage,
+            "age":$scope.studentage,
             "serialNo":'',
         };
 
         console.log(userDetails);
-        if(patientdata.data.email!=$scope.Userregi.email){
+        if(studentdata.data.email!=$scope.Userregi.email){
             $http({
                 method: 'POST',
                 url: 'http://localhost:8081/add/createStudent',
@@ -77,9 +77,9 @@
             }
 
         }).then(function mySuccess(response) {
-            var patientdata=response;
-            $scope.chekedmail=patientdata.data.email;
-            if( $scope.Userregi.email==patientdata.data.email){
+            var studentdata=response;
+            $scope.chekedmail=studentdata.data.email;
+            if( $scope.Userregi.email==studentdata.data.email){
                 window.alert("Email is already extis!")
                 mail=true;
                 console.log('true');
@@ -99,15 +99,15 @@
             var userDetails={
                 "userName":$scope.Userregi.userName,
                 "email":$scope.Userregi.email,
-                "password":$scope.Userregi.pass,
-                "studentId":"",
+                "password":$scope.Userregi.password,
+                "studentId":'',
                 "db":$scope.parent.checkOut,
-                "age":$scope.patientage,
+                "age":$scope.studentage,
                 "serialNo":'',
             };
 
             if($scope.checkboxModel.value1){
-                locUrl='http://localhost:8081/manageStudent';}
+                locUrl='http://localhost:8081/secure/manageStudent';}
             else{  locUrl='http://localhost:8081/createStudent';
             }
             if(!mail){
@@ -133,6 +133,9 @@
                 window.alert("Email is already extis!")
             }
 
+        };
+        $scope.cancelcreateNewStudent=function(){
+            $window.location.href = baseurl;
         };
 
 

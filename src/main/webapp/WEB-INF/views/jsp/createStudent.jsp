@@ -35,7 +35,7 @@
     <form >
          Name:<input type="text" ng-model="Userregi.userName" required=true/><br/>
         Email Address:<input type="email" ng-blur="emailcheck()" ng-model="Userregi.email" required="true"/><br/>
-        Password :<input type="password"  ng-model="Userregi.pass" required="true"/><br/>
+        Password :<input type="password"  ng-model="Userregi.password" required="true"/><br/>
 
         Date of Birth:
         <div class="input-group date" data-provide="datepicker">
@@ -46,14 +46,16 @@
             </span>
         </div><br/>
 
-        Age:<input type="text" readonly="readonly" ng-model="patientage"/><br/>
+        Age:<input type="text" readonly="readonly" ng-model="studentage"/><br/>
 
         ​​ ​​ <input type="checkbox" class="status" ng-model="checkboxModel.value1"/>View List Page <br/>
         <input type="checkbox" class="status" ng-model="checkboxModel.value2"/>Back Add Page​
 
         <div class="modal-footer">
             <input type="submit" value="Create New Student" ng-click="createNewStudent()"/>
+           <div> <input type="submit" value="Cancel" ng-click="cancelcreateNewStudent()"/></div>
         </div>
+
     </form>
     <script type="javascript">
 

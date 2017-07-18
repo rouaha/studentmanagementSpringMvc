@@ -49,11 +49,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="data in patientdata" >
+        <tr ng-repeat="data in studentdata" >
             <td><input type="checkbox" ng-model="tableSelection[$index]"/></td> <td>{{data.serialNo}}</td><td>{{data.studentId}}</td><td>{{data.userName}}</td>
             <td>{{data.email}}</td><td>{{data.db}}</td><td>{{data.age}}</td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editpatient(data)">Update</button>
-                <button type="button" class="btn btn-link"  ng-click="deletepatient(data)" >Delete</button></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editStudentOnclick(data)">Update</button>
+                <button type="button" class="btn btn-link"  ng-click="deleteStudent(data)" >Delete</button></td>
         </tr>
 
         </tbody>
@@ -68,8 +68,8 @@
                 </div>
                 <div class="modal-body">
                     <form >
-                        User Name:<input type="text" ng-model="updatePatient.userName"/><br/>
-                        Email Address:<input type="text" ng-model="updatePatient.email"/><br/>
+                        User Name:<input type="text" ng-model="updateStudent.userName"/><br/>
+                        Email Address:<input type="text" ng-model="updateStudent.email"/><br/>
                         Date of Birth:
                         <div class="input-group date" data-provide="datepicker">
                             <input type="text" class="form-control" id="date" name="date" ng-blur="calculateAge()" ng-model="parent.checkOut"/>
@@ -82,7 +82,7 @@
                         Age:<input type="text" readonly="readonly" ng-model="calculatedage"/><br/>
 
                         <div class="modal-footer">
-                            <input type="submit" value="Update" ng-click="updatePatientInformation()"/>
+                            <input type="submit" value="Update" ng-click="updateStudentInformation()"/>
                         </div>
                     </form>
                 </div>

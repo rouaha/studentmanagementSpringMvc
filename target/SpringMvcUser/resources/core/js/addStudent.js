@@ -7,7 +7,7 @@ controller('formCtrl', function($scope,$http,$window) {
 
     var pserialNo=0;
 
-    $scope.updatePatient={
+    $scope.updateStudent={
         "userName":"",
         "email":"",
         "password":"",
@@ -19,14 +19,14 @@ controller('formCtrl', function($scope,$http,$window) {
     };
     $http({
         method: 'GET',
-        url: 'http://localhost:8081/studentInfo',
+        url: 'http://localhost:8081/secure/studentInfo',
 
         headers: {
             'Content-Type': 'application/json'
         }
 
     }).then(function mySuccess(response) {
-        $scope.patientdata=response.data;
+        $scope.studentdata=response.data;
         console.log(response);
 
 
@@ -43,8 +43,8 @@ controller('formCtrl', function($scope,$http,$window) {
         }
 
     }).then(function mySuccess(response) {
-        $scope.patientSerialNo=response.data;
-        pserialNo = $scope.patientSerialNo.serialNo
+        $scope.studentSerialNo=response.data;
+        pserialNo = $scope.studentSerialNo.serialNo
         //console.log('ser '+$scope.patientSerialNo.serialNo);
 
 
@@ -64,14 +64,14 @@ controller('formCtrl', function($scope,$http,$window) {
 
     };
 
-    $scope.editpatient = function (data){
+    $scope.editStudentOnclick = function (data){
         $scope.parent = {'checkOut':data.db};
         $scope.calculatedage=data.age;
-        $scope.updatePatient={
+        $scope.updateStudent={
             "userName":data.userName,
             "email":data.email,
             "password":data.password,
-            "studentId":data.healthId,
+            "studentId":data.studentId,
             "db":$scope.parent.checkOut,
             "age":$scope.calculatedage,
             "serialNo":data.serialNo,
@@ -81,15 +81,15 @@ controller('formCtrl', function($scope,$http,$window) {
 
 
     };
-    $scope.updatePatientInformation=function(){
-        $scope.editedPatient={
-            "userName": $scope.updatePatient.userName,
-            "email": $scope.updatePatient.email,
-            "password": $scope.updatePatient.password,
-            "studentId": $scope.updatePatient.healthId,
+    $scope.updateStudentInformation=function(){
+        $scope.editedStudent={
+            "userName": $scope.updateStudent.userName,
+            "email": $scope.updateStudent.email,
+            "password": $scope.updateStudent.password,
+            "studentId": $scope.updateStudent.studentId,
             "db":$scope.parent.checkOut,
             "age":$scope.calculatedage,
-            "serialNo": $scope.updatePatient.serialNo,
+            "serialNo": $scope.updateStudent.serialNo,
 
 
         };
@@ -97,7 +97,7 @@ controller('formCtrl', function($scope,$http,$window) {
         $http({
             method: 'POST',
             url: 'http://localhost:8081/add/createStudent',
-            data:$scope.editedPatient,
+            data:$scope.editedStudent,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -110,22 +110,23 @@ controller('formCtrl', function($scope,$http,$window) {
         }, function myError(response) {
             $scope.myWelcome = response.statusText;
         })
+
         $window.location.reload();
 
 
     };
 
     $scope.removeSelectedItem=function(){
-        for(var i=$scope.patientdata.length-1;i>=0;i--){
+        for(var i=$scope.studentdata.length-1;i>=0;i--){
             if($scope.tableSelection[i]){
-                console.log($scope.patientdata[i].serialNo);
-                //$scope.patientdata.slice(i,1)
+                console.log($scope.studentdata[i].serialNo);
+                //$scope.studenttdata.slice(i,1)
 
                 delete $scope.tableSelection[i];
-                if($scope.patientdata[i].serialNo!=pserialNo){
+                if($scope.studentdata[i].serialNo!=pserialNo){
                     $http({
                         method: 'DELETE',
-                        url: 'http://localhost:8081/deleteStudent/'+$scope.patientdata[i].serialNo
+                        url: 'http://localhost:8081/secure/deleteStudent/'+$scope.studentdata[i].serialNo
 
                     }).then(function mySuccess(response) {
 
@@ -145,13 +146,13 @@ controller('formCtrl', function($scope,$http,$window) {
             }
         }
     };
-    $scope.deletepatient=function(fordeleteData){
+    $scope.deleteStudent=function(fordeleteData){
         console.log("delete"+fordeleteData.serialNo);
         var DeleteserialNo=fordeleteData.serialNo
         if(DeleteserialNo != pserialNo){
             $http({
                 method:'DELETE',
-                url:'http://localhost:8081/deleteStudent/'+DeleteserialNo
+                url:'http://localhost:8081/secure/deleteStudent/'+DeleteserialNo
             }).then(function mySuccess(resonse){
                 $window.location.reload();
 
