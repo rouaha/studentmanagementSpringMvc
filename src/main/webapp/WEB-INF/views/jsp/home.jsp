@@ -1,5 +1,6 @@
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <head>
@@ -53,8 +54,20 @@
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">Sign in</a></li>
+            <div class="nav navbar-nav navbar-right">
+
+
+
+
+            <c:choose>
+                <c:when test="${userName != null}">
+                     <li><a href="/logout">Logout ${userName}</a></li>
+                </c:when>
+                <c:otherwise>
+                     <li><a href="/login">Signin</a></li>
+
+                </c:otherwise>
+            </c:choose>
                 <!--
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
