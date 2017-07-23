@@ -35,9 +35,9 @@
 </head>
 
 <body>
-<spring:url value="/resources/core/css/bootstrap.min.css" var="bootstrapcss"/>
+<spring:url value="/webapp/core/css/bootstrap.min.css" var="bootstrapcss"/>
 <link  href="${bootstrapcss}" rel="stylesheet"/>
-<spring:url value="/resources/core/js/bootstrap.min.js" var="bootstrapjs"/>
+<spring:url value="/webapp/core/js/bootstrap.min.js" var="bootstrapjs"/>
 <script src="${bootstrapjs}"></script>
 
 <div class="container">

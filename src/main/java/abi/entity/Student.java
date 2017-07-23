@@ -1,7 +1,7 @@
 package abi.entity;
 
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 /**
  * Created by BS190 on 7/5/2017.

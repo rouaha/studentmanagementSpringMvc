@@ -1,5 +1,6 @@
 package abi.entity;
 
+
 import javax.persistence.*;
 
 /**

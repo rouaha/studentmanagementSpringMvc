@@ -12,7 +12,7 @@
 <head>
     <title>Create Student</title>
 
-    <spring:url value="/resources/core/css/studentForm.css" var="studentForm"/>
+    <spring:url value="/webapp/core/css/studentForm.css" var="studentForm"/>
     <link href="${studentForm}" rel="stylesheet">
 
     <script type="text/javascript" src="http://code.angularjs.org/snapshot/angular.js"></script>
@@ -23,7 +23,7 @@
     <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript"  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
-    <spring:url value="/resources/core/js/home.js" var="addStudent"></spring:url>
+    <spring:url value="/webapp/core/js/home.js" var="addStudent"></spring:url>
     <script src="${addStudent}"></script>
 </head>
 <body>

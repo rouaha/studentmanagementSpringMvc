@@ -10,13 +10,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <spring:url value="/resources/core/css/studentTable.css" var="studentTable"></spring:url>
+    <spring:url value="/webapp/core/css/studentTable.css" var="studentTable"></spring:url>
     <link href="${studentTable}" rel="stylesheet">
-    <spring:url value="/resources/core/css/studentForm.css" var="studentForm"></spring:url>
+    <spring:url value="/webapp/core/css/studentForm.css" var="studentForm"></spring:url>
     <link href="${studentForm}" rel="stylesheet">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
 
-    <spring:url value="/resources/core/js/addStudent.js" var="addStudent"></spring:url>
+    <spring:url value="/webapp/core/js/addStudent.js" var="addStudent"></spring:url>
     <script src="${addStudent}"></script>
 
 

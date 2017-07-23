@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by BS190 on 7/11/2017.
  */
-@Component
+@Repository
 public  class UserRepository  {
     @Autowired
     UserRepo userRepo;
