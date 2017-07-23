@@ -4,14 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/jsp/studentManagement.jsp" description="Title" line="31" />
   </component>
   <component name="ChangeListManager">
-    <list id="5d43e901-a023-4356-a92f-af15f36dcb59" name="Default" comment="">
+    <list default="true" id="8d167440-3026-408c-97a0-cc0ed3ef4a72" name="New changelist" comment="add file dependency a">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list default="true" id="8d167440-3026-408c-97a0-cc0ed3ef4a72" name="New changelist" comment="add file dependency all" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +168,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/abi/controller/StudentController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="44" column="74" lean-forward="true" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
+              <caret line="44" column="74" lean-forward="false" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -524,36 +522,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="abi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="studentManagementV2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="studentManagementv2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="abi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="repository" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1251,7 +1219,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5d43e901-a023-4356-a92f-af15f36dcb59" name="Default" comment="" />
+      <changelist id="" name="Default" comment="" />
       <changelist id="" name="New changelist" comment="add dependency " />
       <changelist id="8d167440-3026-408c-97a0-cc0ed3ef4a72" name="New changelist" comment="add file dependency" />
       <created>1499077422210</created>
@@ -1285,7 +1253,7 @@
       <workItem from="1500444766311" duration="12410000" />
       <workItem from="1500533418332" duration="7529000" />
       <workItem from="1500544044850" duration="12717000" />
-      <workItem from="1500789851423" duration="10266000" />
+      <workItem from="1500789851423" duration="10710000" />
     </task>
     <task id="LOCAL-00001" summary="Add security config">
       <created>1499781627152</created>
@@ -1364,7 +1332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1500808238160</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="setup integration test spring mvc">
+      <created>1500808374120</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1500808374120</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1400,7 +1375,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="243570000" />
+    <option name="totallyTimeSpent" value="244014000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1413,7 +1388,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1434,7 +1408,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.57296467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32872504" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1504,6 +1478,12 @@
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
               </option>
+              <option name="TEXT_FILTER_SETTINGS">
+                <TextFilterSettings>
+                  <option name="REGEX" value="true" />
+                  <option name="MATCH_CASE" value="true" />
+                </TextFilterSettings>
+              </option>
               <option name="COLUMN_ORDER">
                 <list>
                   <option value="0" />
@@ -1528,8 +1508,10 @@
     <MESSAGE value="Add security configuration  solved login/logout complete by xml configure" />
     <MESSAGE value="Add security configuration  solved login/logout complete by xml configure  and setup basic intregation test" />
     <MESSAGE value="add file dependency all" />
-    <option name="LAST_COMMIT_MESSAGE" value="add file dependency all" />
+    <MESSAGE value="setup integration test spring mvc" />
+    <option name="LAST_COMMIT_MESSAGE" value="setup integration test spring mvc" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1883,7 +1865,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/abi/controller/StudentController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="44" column="74" lean-forward="true" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
+          <caret line="44" column="74" lean-forward="false" selection-start-line="44" selection-start-column="74" selection-end-line="44" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
