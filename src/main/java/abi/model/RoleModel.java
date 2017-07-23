@@ -1,0 +1,30 @@
+package abi.model;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * Created by BS190 on 7/17/2017.
+ */
+@Component
+public class RoleModel {
+    private int roleId;
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String role;
+
+}
