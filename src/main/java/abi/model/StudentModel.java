@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class StudentModel {
     private int serialNo;
+    private String studentId;
+    private String userName;
+    private String email;
+    private String password;
+    private String db;
+    private String age;
+
 
     public String getStudentId() {
         return studentId;
@@ -17,12 +24,7 @@ public class StudentModel {
         this.studentId = studentId;
     }
 
-    private String studentId;
-    private String userName;
-    private String email;
-    private String password;
-    private String db;
-    private String age;
+
 
 
     public int getSerialNo() {
