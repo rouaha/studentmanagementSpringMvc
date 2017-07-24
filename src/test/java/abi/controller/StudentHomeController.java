@@ -1,6 +1,7 @@
 package abi.controller;
 
 import abi.model.StudentModel;
+import abi.repository.StudentRepository;
 import abi.repository.UserRepository;
 import abi.service.StudentService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.persistence.EntityManager;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -54,23 +56,30 @@ public class StudentHomeController {
 
     @Autowired
     WebApplicationContext webApplicationContext;
+
     @Mock
-    StudentService studentService;
+    @Autowired
+    StudentRepository studentRepository;
+
+
     @InjectMocks
-    StudentRestController studentRestController;
+    @Autowired
+    StudentService studentService;
+
+
     @Before
     public  void setUp(){
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    /*@Test
+    @Test
     public void getHomePage_shouldRenderHomePage() throws  Exception{
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("home"))
                 .andExpect(forwardedUrl("/WEB-INF/views/jsp/home.jsp"));
-    }*/
+    }
     @Test
     public void testCheckByEmail() throws Exception {
         StudentModel studentModel = new StudentModel();
@@ -82,13 +91,20 @@ public class StudentHomeController {
         studentModel.setUserName("rasel");
         studentModel.setStudentId("0110346139401");
 
-        // when(studentService.retriveStudentByEmail(studentModel.getEmail())).thenReturn(studentModel);
+        StudentModel chStudentModel = studentService.retriveStudentByEmail(studentModel.getEmail());
         mockMvc.perform(post("/checkEmail")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(studentModel)))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.email", is("rasej@gmail.com")));
+                .andExpect(jsonPath("$.email", is(chStudentModel.getEmail())));
+
+    }
+
+    @Test
+    public void checkmail() {
+        StudentModel studentModel = studentService.retriveStudentByEmail("rasej@gmail.com");
+        assertEquals("rasej@gmail.com", studentModel.getEmail());
 
     }
 
