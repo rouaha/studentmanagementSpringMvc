@@ -69,4 +69,14 @@ public class StudentController {
         }
         return "redirect:/";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
     }
+
+    @RequestMapping(value = "/forgetPassword", method = RequestMethod.GET)
+    public String getForgetPage() {
+        return "forgetPass";
+    }
+
+    @RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+    public String getResetPassPage() {
+        return "resetPass";
+    }
 }

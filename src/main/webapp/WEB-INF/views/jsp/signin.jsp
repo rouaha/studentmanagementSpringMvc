@@ -34,7 +34,9 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-group ${error != null ? 'has-error' : ''}">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="/registration">Create an account</a></h4>
+            <h4 class="text-center"><a href="/registration">Create an account.</a> <h6 class="text-center"><a
+                    href="/forgetPassword"> Or forget password?</a></h6></h4>
+
         </div>
 
     </form>

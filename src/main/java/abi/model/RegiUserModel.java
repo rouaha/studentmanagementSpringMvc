@@ -13,6 +13,11 @@ import java.util.Set;
 public class RegiUserModel {
     private  long userId;
     private String email;
+    private String name;
+    private String lastName;
+    private int active;
+    private String password;
+    private Set<RoleModel> roles;
 
     public long getUserId() {
         return userId;
@@ -70,9 +75,5 @@ public class RegiUserModel {
         this.roles = roles;
     }
 
-    private String name;
-    private String lastName;
-    private  int active;
-    private  String password;
-    private Set<RoleModel> roles;
+
 }

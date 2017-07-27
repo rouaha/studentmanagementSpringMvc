@@ -78,7 +78,7 @@ StudentRepository studentRepository;
 
     public StudentModel retriveStudentByEmailandPass(String email, String pass) {
 
-        Student student=  studentRepository.getStudentByemailandPass(email,pass);
+        Student student = studentRepository.getStudentBymailandPass(email, pass);
         if(student!=null){
             StudentModel studentModel=new StudentModel();
             studentModel.setUserName(student.getUserName());
@@ -93,7 +93,7 @@ StudentRepository studentRepository;
     }
     public StudentModel retriveStudentByEmail(String email) {
 
-        Student student= studentRepository.getStudentByemail(email);
+        Student student = studentRepository.getStudentBymail(email);
 
         StudentModel studentModel=new StudentModel();
         if(student!=null) {

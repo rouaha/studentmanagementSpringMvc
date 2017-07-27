@@ -1,5 +1,6 @@
 package abi.controller;
 
+import abi.model.RegiUserModel;
 import abi.model.StudentModel;
 import abi.repository.StudentRepository;
 import abi.repository.UserRepository;
@@ -72,24 +73,32 @@ public class StudentHomeController {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    @Test
-    public void getHomePage_shouldRenderHomePage() throws  Exception{
+    /* @Test
+     public void getHomePage_shouldRenderHomePage() throws  Exception{
 
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("home"))
-                .andExpect(forwardedUrl("/WEB-INF/views/jsp/home.jsp"));
-    }
-    @Test
-    public void testCheckByEmail() throws Exception {
-        StudentModel studentModel = new StudentModel();
-        studentModel.setSerialNo(28);
+         mockMvc.perform(get("/"))
+                 .andExpect(status().isOk())
+                 .andExpect(view().name("home"))
+                 .andExpect(forwardedUrl("/WEB-INF/views/jsp/home.jsp"));
+     }
+     @Test
+     public void testRegistrationPage()throws  Exception{
+         mockMvc.perform(get("/registration"))
+                 .andExpect(status().isOk())
+                 .andExpect(view().name("signup"))
+                 .andExpect(forwardedUrl("/WEB-INF/views/jsp/signup.jsp"));
+     }
+     @Test
+     public void testCheckByEmail() throws Exception {
+         StudentModel studentModel = new StudentModel();
+        *//* studentModel.setSerialNo(28);
         studentModel.setAge("26 Years");
         studentModel.setDb("07/31/1990");
-        studentModel.setEmail("rasej@gmail.com");
+
         studentModel.setPassword("123");
         studentModel.setUserName("rasel");
-        studentModel.setStudentId("0110346139401");
+        studentModel.setStudentId("0110346139401");*//*
+        studentModel.setEmail("rasej@gmail.com");
 
         StudentModel chStudentModel = studentService.retriveStudentByEmail(studentModel.getEmail());
         mockMvc.perform(post("/checkEmail")
@@ -99,12 +108,26 @@ public class StudentHomeController {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.email", is(chStudentModel.getEmail())));
 
-    }
-
+    }*/
+/*
     @Test
-    public void checkmail() {
+    public void matchCheckMail() {
         StudentModel studentModel = studentService.retriveStudentByEmail("rasej@gmail.com");
-        assertEquals("rasej@gmail.com", studentModel.getEmail());
+        assertEquals("rase@gmail.com", studentModel.getEmail());
+
+    }*/
+    @Test
+    public void Test_forgetSetup() throws Exception {
+        RegiUserModel regiUserModel = new RegiUserModel();
+        regiUserModel.setName("Abi");
+        regiUserModel.setLastName("abiabdullah");
+        regiUserModel.setEmail("abi@gmail.com");
+        mockMvc.perform(post("/forgetPassword")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(regiUserModel)))
+                .andExpect(status().isOk());
+        // .andExpect(content().contentType(MediaType.TEXT_PLAIN_VALUE));
+
+
 
     }
 

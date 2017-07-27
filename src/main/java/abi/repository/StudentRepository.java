@@ -16,7 +16,7 @@ public class StudentRepository  {
     @Autowired(required=true)
     StudentRepo studentRepo;
     public List<Student> getStudentList(){
-        return (List<Student>) studentRepo.findAll();
+        return studentRepo.findAll();
     }
     public void addStudent(Student student){
         studentRepo.save(student);
@@ -26,11 +26,11 @@ public class StudentRepository  {
         studentRepo.delete(id);
     }
 
-    public Student getStudentByemailandPass(String email, String pass) {
+    public Student getStudentBymailandPass(String email, String pass) {
         return studentRepo.fetchStudentByEmailAndPass(email,pass);
     }
 
-    public Student getStudentByemail(String email) {
+    public Student getStudentBymail(String email) {
         return studentRepo.fetchStudentByEmail(email);
     }
 

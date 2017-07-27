@@ -2,10 +2,13 @@ package abi.service;
 
 import abi.entity.Role;
 import abi.entity.User;
+import abi.entity.UserTempPassData;
 import abi.model.RegiUserModel;
 
 import abi.model.RoleModel;
 import abi.repository.UserRepository;
+import abi.repository.UserTempPassRepository;
+import com.sun.deploy.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,7 +27,8 @@ import java.util.*;
 //@Component("customerService")
     @Component
 public class CustomerService implements UserDetailsService {
-
+    @Autowired
+    private UserTempPassRepository userTempPassRepository;
 
 @Autowired
  private UserRepository userRepository;
@@ -98,4 +102,84 @@ public class CustomerService implements UserDetailsService {
         return regiUserModel;
     }
 
+    public void createUser(RegiUserModel regiUserModel) {
+        User user = new User();
+        if (regiUserModel != null) {
+            if (regiUserModel.getUserId() >= 0) {
+                user.setUserId(regiUserModel.getUserId());
+            }
+            if (org.springframework.util.StringUtils.hasText(regiUserModel.getLastName())) {
+                user.setLastName(regiUserModel.getLastName());
+            }
+            if (org.springframework.util.StringUtils.hasText(regiUserModel.getName())) {
+                user.setName(regiUserModel.getName());
+            }
+            if (org.springframework.util.StringUtils.hasText(regiUserModel.getEmail())) {
+                user.setEmail(regiUserModel.getEmail());
+            }
+            if (org.springframework.util.StringUtils.hasText(regiUserModel.getPassword())) {
+                user.setPassword(regiUserModel.getPassword());
+            }
+            user.setActive(regiUserModel.getActive());
+
+
+            Set<Role> roles = new HashSet<>();
+            for (RoleModel roleModel : regiUserModel.getRoles()) {
+                Role role = new Role();
+               /* if(regiUserModel.getRoles()!=null) {
+                    role.setRole(roleModel.getRole());
+                }*/
+                role.setRole("ROLE_ADMIN");
+                roles.add(role);
+                role.setUser(user);
+            }
+
+
+            user.setRoles(roles);
+            userRepository.createRegiUser(user);
+        }
+    }
+
+    public String getUserDetailsForForgetPass(RegiUserModel regiUserModel) {
+        String lastName = regiUserModel.getLastName();
+        String email = regiUserModel.getEmail();
+        User user = userRepository.getUserDataForForgetPass(lastName, email);
+        String tempPass = "";
+        if (user != null) {
+            if (user.getEmail().equalsIgnoreCase(email) && user.getLastName().equalsIgnoreCase(lastName)) {
+                UserTempPassData userTempPassData = new UserTempPassData();
+                tempPass = "12345";
+                userTempPassData.setUserId(user.getUserId());
+                userTempPassData.setUserEmail(user.getEmail());
+                userTempPassData.setUserTempPass(tempPass);
+                try {
+                    userTempPassRepository.create(userTempPassData);
+                    return tempPass;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }
+        return "Invalid Details ";
+
+    }
+
+    public void resetPassForForgetPass(UserTempPassData userTempPassData) {
+
+        UserTempPassData tempPassData = userTempPassRepository
+                .getForgetPassDetailsByTempPassword(userTempPassData.getUserTempPass());
+        if (tempPassData != null) {
+            User user = userRepository.findByEmail(tempPassData.getUserEmail());
+
+            user.setPassword(userTempPassData.getUserNewpass());
+            userRepository.createRegiUser(user);
+            userTempPassRepository.deleteById(tempPassData.getId());
+
+
+        }
+
+
+    }
 }

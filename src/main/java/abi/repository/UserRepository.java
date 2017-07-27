@@ -16,4 +16,16 @@ public  class UserRepository  {
 
         return userRepo.findByUserName(name);
     }
+
+    public void createRegiUser(User user) {
+        userRepo.save(user);
+    }
+
+    public User getUserDataForForgetPass(String lastName, String email) {
+        return userRepo.findBylastNameAndEmail(lastName, email);
+    }
+
+    public User findByEmail(String userEmail) {
+        return userRepo.findByUserEmail(userEmail);
+    }
 }
