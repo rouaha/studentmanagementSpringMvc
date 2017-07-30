@@ -10,7 +10,7 @@
 <body>
 <spring:url value="webapp/core/css/bootstrap.min.css" var="bootstrapcss"/>
 <link href="${bootstrapcss}" rel="stylesheet"/>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <spring:url value="webapp/core/js/bootstrap.min.js" var="bootstrapjs"/>
 <script src="${bootstrapjs}"></script>
 
@@ -61,7 +61,18 @@
 
             <c:choose>
                 <c:when test="${userName != null}">
-                     <li><a href="/logout">Logout ${userName}</a></li>
+                    <%-- <li><a href="/logout">Logout ${userName}</a></li>--%>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">${userName} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">My Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Logout ${userName}</a></li>
+                        </ul>
+                    </li>
                 </c:when>
                 <c:otherwise>
                      <li><a href="/login">Signin</a></li>

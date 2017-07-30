@@ -33,7 +33,17 @@
 
 <div ng-app="myApp" ng-controller="formCtrl">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#frommodal" style="text-align: right;width: 90px;float: inherit; " ng-click="addStudent()" >Add Student</button>
-    <button type="button" class="btn btn-primary" style="text-align: right;width: 180px;float: inherit " ng-click="removeSelectedItem()" >Remove Selected Student</button>
+    <button type="button" class="btn btn-primary" style="text-align: right;width: 180px;float: inherit "
+            ng-click="removeSelectedItem()">Remove Selected Student
+    </button>
+    <!-- Success message -->
+    <div class="alert alert-success" role="alert" id="success_message" ng-show="successDialog">Success <i
+            class="glyphicon glyphicon-thumbs-up"></i> Successfully deleted selected item
+    </div>
+    <!-- Success message -->
+    <div class="alert alert-warning" role="alert" id="warning_message" ng-show="warningDialog"><i
+            class="glyphicon glyphicon-warning-sign"></i> Nothing has been selected
+    </div>
     <table class="reset" >
 
         <thead>
@@ -52,9 +62,12 @@
         <tr ng-repeat="data in studentdata" >
             <td><input type="checkbox" ng-model="tableSelection[$index]"/></td> <td>{{data.serialNo}}</td><td>{{data.studentId}}</td><td>{{data.userName}}</td>
             <td>{{data.email}}</td><td>{{data.db}}</td><td>{{data.age}}</td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editStudentOnclick(data)">Update</button>
-                <button type="button" class="btn btn-link"  ng-click="deleteStudent(data)" >Delete</button></td>
-        </tr>
+            <td><%--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-click="editStudentOnclick(data)">
+            </button>--%> <a href=""> <i class="glyphicon glyphicon-edit" data-toggle="modal" data-target="#myModal"
+                                         ng-click="editStudentOnclick(data)"></i></a>
+                <a href=""> <i class="glyphicon glyphicon-remove" ng-click="deleteStudent(data)"></i></a>
+                <%--<button type="button" class="btn btn-link"  ng-click="deleteStudent(data)" >Delete</button>--%>
+            </td>
 
         </tbody>
     </table>

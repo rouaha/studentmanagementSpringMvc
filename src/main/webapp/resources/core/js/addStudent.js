@@ -4,7 +4,8 @@
 angular.module('myApp',[]).
 controller('formCtrl', function($scope,$http,$window) {
     $scope.tableSelection = {};
-
+    $scope.successDialog = false;
+    $scope.warningDialog = false;
     var pserialNo=0;
 
     $scope.updateStudent={
@@ -109,46 +110,51 @@ controller('formCtrl', function($scope,$http,$window) {
 
         }, function myError(response) {
             $scope.myWelcome = response.statusText;
-        })
+        });
 
         $window.location.reload();
 
 
     };
 
-    $scope.removeSelectedItem=function(){
-        for(var i=$scope.studentdata.length-1;i>=0;i--){
-            if($scope.tableSelection[i]){
+    $scope.removeSelectedItem = function () {
+        if ($scope.tableSelection != null) {
+            for (var i = $scope.studentdata.length - 1; i >= 0; i--) {
+                if ($scope.tableSelection[i]) {
                 console.log($scope.studentdata[i].serialNo);
                 //$scope.studenttdata.slice(i,1)
 
                 delete $scope.tableSelection[i];
-                if($scope.studentdata[i].serialNo!=pserialNo){
+                    if ($scope.studentdata[i].serialNo != pserialNo) {
                     $http({
                         method: 'DELETE',
-                        url: 'http://localhost:8081/secure/deleteStudent/'+$scope.studentdata[i].serialNo
+                        url: 'http://localhost:8081/secure/deleteStudent/' + $scope.studentdata[i].serialNo
 
                     }).then(function mySuccess(response) {
+                        $scope.successDialog = !$scope.successDialog;
 
-
-                        $window.location.reload();
+                        // $window.location.reload();
 
                     }, function myError(response) {
                         $scope.myWelcome = response.statusText;
+                        $scope.warningDialog = !$scope.warningDialog;
                     })
 
-                }else{
-                    window.alert('You can not remove your own account!')}
-
-
+                    } else {
+                        window.alert('You can not remove your own account!')
+                    }
 
 
             }
         }
+            $scope.successDialog = !$scope.successDialog;
+        } else {
+            $scope.warningDialog = !$scope.warningDialog;
+        }
     };
     $scope.deleteStudent=function(fordeleteData){
         console.log("delete"+fordeleteData.serialNo);
-        var DeleteserialNo=fordeleteData.serialNo
+        var DeleteserialNo = fordeleteData.serialNo;
         if(DeleteserialNo != pserialNo){
             $http({
                 method:'DELETE',
@@ -163,8 +169,7 @@ controller('formCtrl', function($scope,$http,$window) {
         }else{window.alert('You can not remove your own account!');}
 
 
-
-    }
+    };
 
 
 

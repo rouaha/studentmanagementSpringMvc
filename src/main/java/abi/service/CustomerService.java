@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 /**
@@ -148,7 +149,10 @@ public class CustomerService implements UserDetailsService {
         if (user != null) {
             if (user.getEmail().equalsIgnoreCase(email) && user.getLastName().equalsIgnoreCase(lastName)) {
                 UserTempPassData userTempPassData = new UserTempPassData();
-                tempPass = "12345";
+                SecureRandom random = new SecureRandom();
+                long num = (int) (random.nextInt(100000) + user.getUserId());
+                tempPass = String.format("%05d", num);
+                //tempPass = "12345";
                 userTempPassData.setUserId(user.getUserId());
                 userTempPassData.setUserEmail(user.getEmail());
                 userTempPassData.setUserTempPass(tempPass);
@@ -175,7 +179,9 @@ public class CustomerService implements UserDetailsService {
 
             user.setPassword(userTempPassData.getUserNewpass());
             userRepository.createRegiUser(user);
-            userTempPassRepository.deleteById(tempPassData.getId());
+            //userTempPassRepository.deleteById(tempPassData.getUserId());
+            userTempPassRepository.deleteByUserId(tempPassData.getUserId());
+
 
 
         }
